@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nosso Universo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&family=Poppins:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+   
+</head>
+<body>
+
+    <div id="intro-overlay">
+        <p class="intro-text">
+            Você merece um pedaço da onde você veio, então resolvi fazer esse presente com muito carinho. Espero que goste. Aperta F ONZE, fica melhor.
+        </p>
+        <button class="start-btn" id="start-btn">COMEÇAR</button>
+    </div>
+
+    <div class="discovery-hud" id="hud">
+        <span class="hud-counter" id="counter-text">0 / 0</span>
+    </div>
+
+    <div id="mystery-hint">o que será que acontece quando todas as estrelas são descobertas?</div>
+
+    <div id="finale-overlay">
+        <div class="finale-content">
+            <p class="finale-text">
+                Essa foi minha dedicação pra você, pra te mostrar com ações o quanto sua companhia me faz bem. 
+                <br><br>
+                Obrigado por todos os momentos que tivemos até agora; sejam eles de felicidade, estresse ou de tristeza. 
+                <br><br>
+                Sempre estarei aqui pra você e por você, conta com seu amigo biel.
+            </p>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="/clarinha/musicas/instrumental.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="finale-music">
+        <source src="/clarinha/musicas/vocal.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="star-sfx">
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c605274d75.mp3?filename=magical-sparkle-1278.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="music-player" id="music-player">
+        <button class="play-btn" id="toggle-music">
+            <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="pause-icon" viewBox="0 0 24 24" style="display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <div class="equalizer paused" id="equalizer">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+        <div class="track-info">
+            <span class="track-name" id="track-name">Pense em mim</span>
+        </div>
+    </div>
+
+    <div id="text-overlay"></div>
+    <canvas id="canvas"></canvas>
+
+   <script src="script.js"></script>
+
+</body>
+</html>
