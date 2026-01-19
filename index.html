@@ -3,18 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nosso Universo</title>
+    <title>Clarinha</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&family=Poppins:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
-   
 </head>
 <body>
 
-    <div id="intro-overlay">
+<div id="intro-overlay">
         <p class="intro-text">
-            Você merece um pedaço da onde você veio, então resolvi fazer esse presente com muito carinho. Espero que goste. Aperta F ONZE, fica melhor.
+            Você merece um pedaço de onde você veio,<br> então resolvi fazer esse presente com muito carinho.<br>
+            <span style="font-size: 0.8em; opacity: 0.8; margin-top: 10px; display: block;">Espero que goste.</span>
         </p>
-        <button class="start-btn" id="start-btn">COMEÇAR</button>
+        <button class="btn-universal" id="start-btn">Começar</button>
+    </div>
+
+    <div id="letter-screen">
+        <div class="letter-content" id="letter-body">
+            Leia, se quiser entender um pouco mais sobre mim.
+            <br><br>
+            Sempre tive facilidade para te elogiar, talvez porque passei a vida inteira esperando encontrar alguém como você.
+            <br>
+            Várias noites, peguei no sono imaginando tudo o que faríamos quando finalmente nos conhecêssemos: viajar, rir, jogar, dividir segredos... coisas íntimas que só os melhores amigos tem.
+            <br><br>
+            Hoje, conhecendo você, sinto que isso talvez tenha sido apenas um devaneio.
+            <br>
+            Não me vejo como alguém especial, nem interessante e nem de longe, bonito. Você, pelo contrário, é fascinante, o oposto total de mim.
+            <br>
+            Sinto que, mesmo quando te faço rir, ainda não é o suficiente; mesmo te contando tudo sobre mim, ainda não sou digno de que você faça o mesmo comigo.
+            <br><br>
+            Tudo isso me faz pensar, será que eu sou quem você precisa?
+            <br>
+            Quando você quiser, sei que pode encontrar alguém que te entenda muito melhor do que eu tento te entender.
+            <br>
+            E isso me desespera.
+            <br><br>
+            Tive um sonho com você, mas não do jeito que eu queria.
+            <br>
+            Nele, você encontrava um cara com o mesmo nome que o meu. Ele forçava a voz e te fazia rir de um jeito que eu nunca consegui. E, como eu temia, você se foi.
+            <br><br>
+            Eu não vou te prender a mim. Seria um egoísmo e uma obsessão ridícula fazer isso, mesmo que, no fundo, seja o que eu queira.
+            <br><br>
+            Eu queria muito saber como ficaria a mistura dos meus olhos com os seus, do seu cabelo com o meu.
+            <br>
+            Uma mistura completa de nós dois, correndo por aí e dando trabalho por quer que fossemos.
+            <br>
+            Mas acho que o nosso "Casamento Americano" não vai permitir que isso aconteça.
+            <br><br>
+            Te desejo o amor de Cristo, pois sei que com isso, nada vai te faltar.
+            <br><br>
+            Espero me curar do que não te contei.
+            <br>
+            E poder um dia sorrir novamente, como eu sorri quando estive com você.
+            <br><br>
+            E, mais uma vez...
+            <br>
+            <span class="supernova-text">Eu te amo.</span>
+        </div>
+        <button class="btn-universal letter-back" onclick="document.getElementById('letter-screen').classList.remove('visible')">VOLTAR</button>
     </div>
 
     <div class="discovery-hud" id="hud">
@@ -30,12 +77,13 @@
                 <br><br>
                 Obrigado por todos os momentos que tivemos até agora; sejam eles de felicidade, estresse ou de tristeza. 
                 <br><br>
-                Sempre estarei aqui pra você e por você, conta com seu amigo biel.
+                Sempre estarei aqui pra você e por você, conta com seu amigo Biel.
             </p>
+            <button class="btn-universal read-more-btn" id="read-more-btn">Ler carta</button>
         </div>
     </div>
 
-    <audio id="bg-music" loop>
+     <audio id="bg-music" loop>
         <source src="/clarinha/musicas/instrumental.mp3" type="audio/mpeg">
     </audio>
     <audio id="finale-music">
@@ -54,14 +102,13 @@
             <div class="bar"></div><div class="bar"></div><div class="bar"></div>
         </div>
         <div class="track-info">
-            <span class="track-name" id="track-name">Pense em mim</span>
+            <span class="track-name" id="track-name">Line 57, final chorus</span>
         </div>
     </div>
 
     <div id="text-overlay"></div>
     <canvas id="canvas"></canvas>
 
-   <script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
