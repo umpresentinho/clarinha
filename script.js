@@ -65,6 +65,7 @@
             "Você não tem reflexo meu amor, porque nada neste mundo pode replicar a beleza divina que você possui."
         ];
 
+
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d', { alpha: false });
         const textOverlay = document.getElementById('text-overlay');
@@ -81,6 +82,8 @@
         const musicPlayer = document.getElementById('music-player');
         const introOverlay = document.getElementById('intro-overlay');
         const startBtn = document.getElementById('start-btn');
+        const readMoreBtn = document.getElementById('read-more-btn');
+        const letterScreen = document.getElementById('letter-screen');
 
         bgMusic.volume = 0.1;
         finaleMusic.volume = 0;
@@ -88,11 +91,10 @@
 
         let width, height;
         let zoom = 0.01; 
-        let targetZoom = 0.01; 
+        let targetZoom = 0.01;
         let panX = 0, panY = 0, targetPanX = 0, targetPanY = 0;
         let isDragging = false, lastMouseX = 0, lastMouseY = 0;
         let initialPinchDistance = null, initialZoom = null;
-
         const constellations = [];
         const shootingStars = [];
         const SPREAD = 12000;
@@ -117,11 +119,12 @@
                 this.type = type; 
                 this.isDiscovered = false;
                 this.isHinted = false;
-                
                 if (type === 'sun') {
-                    this.worldX = 2200; this.worldY = -1800;
+                    this.worldX = 2200;
+                    this.worldY = -1800;
                 } else if (type === 'moon') {
-                    this.worldX = -2500; this.worldY = 2200;
+                    this.worldX = -2500;
+                    this.worldY = 2200;
                 } else {
                     const r1 = seededRandom(id * 456);
                     const r2 = seededRandom(id * 654);
@@ -164,7 +167,6 @@
                 const screenY = height / 2 + (this.worldY + currentPanY) * currentZoom;
 
                 if (!gameStarted && !isFinaleActive) return;
-
                 if (!isFinaleActive) {
                     const margin = 400 * currentZoom;
                     if (screenX < -margin || screenX > width + margin || screenY < -margin || screenY > height + margin) {
@@ -194,7 +196,6 @@
                 this.stars.forEach((s) => {
                     const sx = screenX + s.dx * currentZoom;
                     const sy = screenY + s.dy * currentZoom;
-                    
                     s.pulse += 0.03;
                     const pulseScale = 1 + Math.sin(s.pulse) * 0.25;
                     const size = s.size * Math.max(currentZoom, 0.3) * pulseScale;
@@ -239,7 +240,6 @@
             if (constellation.isHinted) constellation.isHinted = false;
             currentHintIndex = -1;
             lastDiscoveryTime = Date.now();
-            
             if (starSFX.paused) {
                 starSFX.currentTime = 0;
                 starSFX.play().catch(() => {});
@@ -249,7 +249,6 @@
 
             discoveredCount++;
             counterText.textContent = `${discoveredCount} / ${totalConstellations}`;
-
             if (discoveredCount === 1) {
                 mysteryHint.classList.add('visible');
                 setTimeout(() => { mysteryHint.classList.remove('visible'); }, 6000);
@@ -261,10 +260,9 @@
         }
 
         function calculateCFormation() {
-            const radius = 4500; 
+            const radius = 4500;
             const total = constellations.length;
             const startAngle = -2.2, endAngle = 2.2;
-
             constellations.forEach((c, i) => {
                 const progress = i / (total - 1);
                 const angle = startAngle + (endAngle - startAngle) * progress;
@@ -284,20 +282,18 @@
 
             hud.style.opacity = '0';
             mysteryHint.style.opacity = '0';
-            document.getElementById('track-name').textContent = "Pense em mim";
-
+            document.getElementById('track-name').textContent = "American Wedding";
             const fadeOut = setInterval(() => {
-                if (bgMusic.volume > 0.05) bgMusic.volume -= 0.02;
+                if (bgMusic.volume > 0.02) bgMusic.volume -= 0.02;
                 else { bgMusic.pause(); clearInterval(fadeOut); }
             }, 100);
-
+            
             finaleMusic.play().catch(()=>{});
             let vol = 0;
             const fadeIn = setInterval(() => {
                 if (vol < 0.75) { vol += 0.02; finaleMusic.volume = vol; }
                 else clearInterval(fadeIn);
             }, 100);
-
             targetZoom = 0.08; 
             targetPanX = 0;
             targetPanY = 0;
@@ -308,8 +304,7 @@
             panX += (targetPanX - panX) * 0.04;
             panY += (targetPanY - panY) * 0.04;
 
-            ctx.fillStyle = '#050510';
-            ctx.fillRect(0, 0, width, height);
+            ctx.clearRect(0,0, width, height); 
 
             ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
             for(let i=0; i<300; i++) {
@@ -318,7 +313,8 @@
                 let bgX = (r1 * width + panX * 0.05 * zoom) % width;
                 let bgY = (r2 * height + panY * 0.05 * zoom) % height;
                 if (bgX < 0) bgX += width; if (bgY < 0) bgY += height;
-                ctx.beginPath(); ctx.arc(bgX, bgY, 0.8, 0, Math.PI*2); ctx.fill();
+                ctx.beginPath(); ctx.arc(bgX, bgY, 0.8, 0, Math.PI*2);
+                ctx.fill();
             }
 
             if (isFinaleActive) {
@@ -345,7 +341,6 @@
                     c.worldX += (c.targetFinaleX - c.worldX) * 0.004;
                     c.worldY += (c.targetFinaleY - c.worldY) * 0.004;
                 });
-
                 if (Date.now() - finaleStartTime > 32000) {
                     document.getElementById('finale-overlay').classList.add('visible');
                 }
@@ -366,7 +361,7 @@
 
         function startGame() {
             gameStarted = true;
-            bgMusic.play().catch(e => console.log(e));
+            bgMusic.play().catch(e => console.log("pq n iniciou audio? aguenta ai. Te amo Clara.", e));
             playIcon.style.display = 'none'; pauseIcon.style.display = 'block';
             equalizer.classList.remove('paused');
             introOverlay.classList.add('hidden');
@@ -387,11 +382,20 @@
             counterText.textContent = `0 / ${totalConstellations}`;
             animate();
             startBtn.addEventListener('click', startGame);
+            readMoreBtn.addEventListener('click', () => {
+                letterScreen.classList.add('visible');
+            });
         }
 
-        function resize() { width = window.innerWidth; height = window.innerHeight; canvas.width = width; canvas.height = height; }
+        function resize() { 
+            width = window.innerWidth; 
+            height = window.innerHeight; 
+            canvas.width = width;
+            canvas.height = height; 
+        }
+
         window.addEventListener('resize', resize);
-        
+
         toggleMusicBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             const track = isFinaleActive ? finaleMusic : bgMusic;
@@ -424,6 +428,7 @@
             isDragging = true; lastMouseX = e.clientX; lastMouseY = e.clientY;
             canvas.style.cursor = 'grabbing';
         });
+
         window.addEventListener('mousemove', (e) => {
             if (!isDragging) return;
             targetPanX += (e.clientX - lastMouseX) / zoom;
@@ -431,25 +436,36 @@
             lastMouseX = e.clientX; lastMouseY = e.clientY;
             lastDiscoveryTime = Date.now();
         });
-        window.addEventListener('mouseup', () => { isDragging = false; canvas.style.cursor = 'grab'; });
+
+        window.addEventListener('mouseup', () => { 
+            isDragging = false; 
+            canvas.style.cursor = 'grab'; 
+        });
 
         canvas.addEventListener('touchstart', (e) => {
             if (isFinaleActive || !gameStarted) return;
             if (e.target.closest('.music-player')) return;
-            if (e.touches.length === 1) { isDragging = true; lastMouseX = e.touches[0].clientX; lastMouseY = e.touches[0].clientY; }
+            if (e.touches.length === 1) { 
+                isDragging = true; 
+                lastMouseX = e.touches[0].clientX; 
+                lastMouseY = e.touches[0].clientY; 
+            }
             else if (e.touches.length === 2) {
                 isDragging = false;
                 const dx = e.touches[0].clientX - e.touches[1].clientX;
                 const dy = e.touches[0].clientY - e.touches[1].clientY;
-                initialPinchDistance = Math.sqrt(dx*dx + dy*dy); initialZoom = targetZoom;
+                initialPinchDistance = Math.sqrt(dx*dx + dy*dy); 
+                initialZoom = targetZoom;
             }
         }, { passive: false });
+
         canvas.addEventListener('touchmove', (e) => {
             if (isFinaleActive || !gameStarted) return;
             e.preventDefault();
             if (e.touches.length === 1 && isDragging) {
                 const x = e.touches[0].clientX; const y = e.touches[0].clientY;
-                targetPanX += (x - lastMouseX) / zoom; targetPanY += (y - lastMouseY) / zoom;
+                targetPanX += (x - lastMouseX) / zoom; 
+                targetPanY += (y - lastMouseY) / zoom;
                 lastMouseX = x; lastMouseY = y;
             } else if (e.touches.length === 2 && initialPinchDistance) {
                 const dist = Math.sqrt(Math.pow(e.touches[0].clientX-e.touches[1].clientX,2) + Math.pow(e.touches[0].clientY-e.touches[1].clientY,2));
@@ -457,8 +473,10 @@
             }
             lastDiscoveryTime = Date.now();
         }, { passive: false });
-        window.addEventListener('touchend', () => { isDragging = false; initialPinchDistance = null; });
+
+        window.addEventListener('touchend', () => { 
+            isDragging = false; 
+            initialPinchDistance = null; 
+        });
 
         init();
-
-    
